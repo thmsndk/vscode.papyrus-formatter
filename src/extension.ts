@@ -82,12 +82,20 @@ function formatPapyrusCode(unformattedCode: string) {
     }
 
     // Add the current line with the appropriate indentation
-    formattedCode += " ".repeat(currentIndentLevel) + trimmedLine + "\n";
+    formattedCode += " ".repeat(currentIndentLevel) + trimmedLine;
 
     if (trimmedLine.match(blockStartRegex)) {
       // Increase the current indentation level
       currentIndentLevel += indentSize;
     }
+
+    // Add a newline after each line except the last one
+    if (line !== lines[lines.length - 1]) {
+      formattedCode += "\n";
+    }
+
+    // TODO: shrink excessive newlines
+    // TODO: Make sure there is a newline after blockEndRegex
   }
 
   return formattedCode;
