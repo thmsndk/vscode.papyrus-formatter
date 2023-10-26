@@ -4,6 +4,10 @@ All notable changes to the "papyrus-formatter" extension will be documented in t
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.5]
+
+- Fixed a bug that would introduce one extra newline above comments
+
 ## [0.0.4]
 
 - reduce repeated linebreaks to one line

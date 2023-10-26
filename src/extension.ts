@@ -92,7 +92,7 @@ function formatPapyrusCode(unformattedCode: string) {
     }
 
     if (isSingleLineComment) {
-      if (!lastLineWasComment) {
+      if (!lastLineWasComment && !lastLineEmpty) {
         // Add newline above singleline comments
         formattedCode += " ".repeat(currentIndentLevel) + "\n";
       }

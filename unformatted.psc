@@ -27,3 +27,10 @@ EndFunction
 ; This line should also stay here
 SetCursorFillMode(TOP_TO_BOTTOM)
 ; This line should get a new line above it
+
+
+
+; This line should also stay here
+SetCursorFillMode(TOP_TO_BOTTOM)
+
+; This line should stay here
