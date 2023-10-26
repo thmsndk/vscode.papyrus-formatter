@@ -8,7 +8,7 @@ This extension formats papyrus (.psc) documents and was primarly written for mys
   ![Indentation](./images/format-indent.gif)
 - linebreak after endblock
   ![linebreak after end](./images/linebreak-after-endblock.gif)
-- reduce empty lines to one line
+- reduce empty lines to one line, add newline above singleline comment
   ![linebreak after end](./images/remove-repeated-newlines.gif)
 
 <!-- Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
