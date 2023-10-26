@@ -1,13 +1,19 @@
 {
   "name": "papyrus-formatter",
   "publisher": "thmsn",
-  "displayName": "papyrus-formatter",
+  "displayName": "Papyrus Formatter",
   "description": "Formats Papyrus code",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thmsndk/vscode.papyrus-formatter"
+  },
   "engines": {
     "vscode": "^1.83.0"
   },
   "categories": [
+    "Programming Languages",
+    "Formatters",
     "Other"
   ],
   "activationEvents": [

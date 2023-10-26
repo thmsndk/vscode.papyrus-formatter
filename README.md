@@ -1,10 +1,12 @@
 # papyrus-formatter README
 
-This extension formats papyrus (.psc) documents
+This extension formats papyrus (.psc) documents and was primarly written for myself for formatting papyrus code when writing SkyrimSSE mods.
 
 ## Features
 
 - Handles indentation of Event,Function and nested If statements
+
+![Indentation](./images/format-indent.gif)
 
 <!-- Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 

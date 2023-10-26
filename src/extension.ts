@@ -96,6 +96,7 @@ function formatPapyrusCode(unformattedCode: string) {
 
     // TODO: shrink excessive newlines
     // TODO: Make sure there is a newline after blockEndRegex
+    // TODO: Comments should have a space after the ;
   }
 
   return formattedCode;
