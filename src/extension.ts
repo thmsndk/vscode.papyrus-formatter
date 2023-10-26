@@ -74,18 +74,32 @@ function formatPapyrusCode(unformattedCode: string) {
 
   for (const line of lines) {
     // Remove leading and trailing whitespace
-    const trimmedLine = line.trim();
+    let trimmedLine = line.trim();
 
-    if (trimmedLine.match(blockEndRegex)) {
-      // Decrease the current indentation level
+    // Check if the trimmed line has content
+    const hasLineContent = !!trimmedLine;
+
+    if (!hasLineContent) {
+      // Remove additional empty newlines
+      continue;
+    }
+
+    const isStartBlock = trimmedLine.match(blockStartRegex);
+    const isEndBlock = trimmedLine.match(blockEndRegex);
+
+    if (isEndBlock) {
+      // Decrease the current indentation level to end the block
       currentIndentLevel -= indentSize;
+
+      // Add empty line after endBlock
+      trimmedLine += "\n" + " ".repeat(currentIndentLevel);
     }
 
     // Add the current line with the appropriate indentation
     formattedCode += " ".repeat(currentIndentLevel) + trimmedLine;
 
-    if (trimmedLine.match(blockStartRegex)) {
-      // Increase the current indentation level
+    if (isStartBlock) {
+      // Increase the indentation level for the next line
       currentIndentLevel += indentSize;
     }
 
