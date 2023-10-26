@@ -21,4 +21,9 @@ EndFunction
 
 
 
-; This line shoul move up below the other comment
+; This line should move up below the other comment, but with one newlinebetween
+; This line should stay here
+
+; This line should also stay here
+SetCursorFillMode(TOP_TO_BOTTOM)
+; This line should get a new line above it

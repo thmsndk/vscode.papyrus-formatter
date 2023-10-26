@@ -56,6 +56,8 @@ export function activate(context: vscode.ExtensionContext) {
 function formatPapyrusCode(unformattedCode: string) {
   // TODO: depends on joelday.papyrus-lang-vscode and their language parsing perhaps
 
+  // TODO: Comments ; should have a space after the ;
+
   // Define the indentation size (e.g., 4 spaces)
   const indentSize = 4;
 
@@ -72,16 +74,38 @@ function formatPapyrusCode(unformattedCode: string) {
   // Regular expression to identify the end of a block
   const blockEndRegex = /^(EndEvent|EndFunction|endIf)/i;
 
+  let lastLineWasComment = false;
+  let lastLineEmpty = false;
   for (const line of lines) {
     // Remove leading and trailing whitespace
     let trimmedLine = line.trim();
+
+    const isSingleLineComment = trimmedLine.startsWith(";");
 
     // Check if the trimmed line has content
     const hasLineContent = !!trimmedLine;
 
     if (!hasLineContent) {
       // Remove additional empty newlines
+      lastLineEmpty = true;
       continue;
+    }
+
+    if (isSingleLineComment) {
+      if (!lastLineWasComment) {
+        // Add newline above singleline comments
+        formattedCode += " ".repeat(currentIndentLevel) + "\n";
+      }
+
+      lastLineWasComment = true;
+    } else {
+      lastLineWasComment = false;
+    }
+
+    if (lastLineEmpty) {
+      // Reduce the multiple lines to a single line
+      formattedCode += " ".repeat(currentIndentLevel) + "\n";
+      lastLineEmpty = false;
     }
 
     const isStartBlock = trimmedLine.match(blockStartRegex);
@@ -107,10 +131,6 @@ function formatPapyrusCode(unformattedCode: string) {
     if (line !== lines[lines.length - 1]) {
       formattedCode += "\n";
     }
-
-    // TODO: shrink excessive newlines
-    // TODO: Make sure there is a newline after blockEndRegex
-    // TODO: Comments should have a space after the ;
   }
 
   return formattedCode;
