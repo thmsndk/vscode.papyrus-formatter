@@ -57,6 +57,7 @@ function formatPapyrusCode(unformattedCode: string) {
   // TODO: depends on joelday.papyrus-lang-vscode and their language parsing perhaps
 
   // TODO: Comments ; should have a space after the ;
+  // TODO: if you have an endblock and a comment below it, there will be two linebreaks instead of a single one
 
   // Define the indentation size (e.g., 4 spaces)
   const indentSize = 4;
@@ -76,11 +77,10 @@ function formatPapyrusCode(unformattedCode: string) {
 
   let lastLineWasComment = false;
   let lastLineEmpty = false;
+  let lastLineEndBlock = false;
   for (const line of lines) {
     // Remove leading and trailing whitespace
     let trimmedLine = line.trim();
-
-    const isSingleLineComment = trimmedLine.startsWith(";");
 
     // Check if the trimmed line has content
     const hasLineContent = !!trimmedLine;
@@ -91,10 +91,15 @@ function formatPapyrusCode(unformattedCode: string) {
       continue;
     }
 
+    const isSingleLineComment = trimmedLine.startsWith(";");
+    const isStartBlock = trimmedLine.match(blockStartRegex);
+    const isEndBlock = trimmedLine.match(blockEndRegex);
+
     if (isSingleLineComment) {
-      if (!lastLineWasComment && !lastLineEmpty) {
+      if (!lastLineWasComment && !lastLineEmpty && !lastLineEndBlock) {
         // Add newline above singleline comments
         formattedCode += " ".repeat(currentIndentLevel) + "\n";
+        console.log("adding newline above", trimmedLine);
       }
 
       lastLineWasComment = true;
@@ -103,13 +108,13 @@ function formatPapyrusCode(unformattedCode: string) {
     }
 
     if (lastLineEmpty) {
-      // Reduce the multiple lines to a single line
-      formattedCode += " ".repeat(currentIndentLevel) + "\n";
+      if (!lastLineEndBlock) {
+        // Reduce the multiple lines to a single line
+        formattedCode += " ".repeat(currentIndentLevel) + "\n";
+      }
+
       lastLineEmpty = false;
     }
-
-    const isStartBlock = trimmedLine.match(blockStartRegex);
-    const isEndBlock = trimmedLine.match(blockEndRegex);
 
     if (isEndBlock) {
       // Decrease the current indentation level to end the block
@@ -117,6 +122,10 @@ function formatPapyrusCode(unformattedCode: string) {
 
       // Add empty line after endBlock
       trimmedLine += "\n" + " ".repeat(currentIndentLevel);
+
+      lastLineEndBlock = true;
+    } else {
+      lastLineEndBlock = false;
     }
 
     // Add the current line with the appropriate indentation

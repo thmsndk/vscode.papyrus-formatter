@@ -7,6 +7,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.0.5]
 
 - Fixed a bug that would introduce one extra newline above comments
+- Fixed a bug that would introduce one extra newline below endBlocks
 
 ## [0.0.4]
 
