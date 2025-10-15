@@ -34,3 +34,15 @@ SetCursorFillMode(TOP_TO_BOTTOM)
 SetCursorFillMode(TOP_TO_BOTTOM)
 
 ; This line should stay here
+
+Function LogInfo(String message) Global Native
+Function LogWarn(String message) Global Native
+Function LogError(String message) Global Native
+Function LogDebug(String message) Global Native
+Int Function CreateSoundEvent(String name) Global Native
+Function AddStringVariableToSoundEvent(Int handle, String name, String value) Global Native
+Function AddIntVariableToSoundEvent(Int handle, String name, Int _value) Global Native
+Function AddFloatVariableToSoundEvent(Int handle, String _name, Float value) Global Native
+Function AddBoolVariableToSoundEvent(Int handle, String name, Bool _value) Global Native
+Function AddFormVariableToSoundEvent(Int handle, String name, Form _value) Global Native
+Function SendSoundEvent(Int handle) Global Native
