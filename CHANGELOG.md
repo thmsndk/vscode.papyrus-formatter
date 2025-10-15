@@ -4,6 +4,10 @@ All notable changes to the "papyrus-formatter" extension will be documented in t
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.6]
+
+- Fix Broken Indentation for native functions [#1](https://github.com/thmsndk/vscode.papyrus-formatter/issues/1)
+
 ## [0.0.5]
 
 - Fixed a bug that would introduce one extra newline above comments
