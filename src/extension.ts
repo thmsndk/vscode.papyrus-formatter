@@ -70,7 +70,7 @@ function formatPapyrusCode(unformattedCode: string) {
   let currentIndentLevel = 0;
 
   // Regular expression to identify the start of a block (function or if statement)
-  const blockStartRegex = /^(Event|Function|if) .+\)/i;
+  const blockStartRegex = /^(Event|if) .+\)|^Function .+\)(?!.*\bNative\b)/i;
 
   // Regular expression to identify the end of a block
   const blockEndRegex = /^(EndEvent|EndFunction|endIf)/i;
